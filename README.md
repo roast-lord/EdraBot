@@ -1,3 +1,3 @@
 # EdraBot
 
-Repostorio do EdraBot
+Repositorio do EdraBot
