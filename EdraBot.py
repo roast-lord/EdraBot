@@ -1,7 +1,6 @@
 from simulacao import *
 from info import *
 from selenium import webdriver
-
 from selenium.webdriver.support.ui import Select
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.common.keys import Keys
