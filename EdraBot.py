@@ -1,6 +1,7 @@
 from simulacao import *
 from info import *
 from selenium import webdriver
+
 from selenium.webdriver.support.ui import Select
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.common.keys import Keys
@@ -12,8 +13,6 @@ from time import sleep
 marca_motor = marca_motors.split(',')
 modelo_motor = modelo_motors.split(',')
 bateria = baterias.split(',')
-
-chrome_options = webdriver.ChromeOptions()
 
 
 navegador = webdriver.Chrome(ChromeDriverManager().install())
