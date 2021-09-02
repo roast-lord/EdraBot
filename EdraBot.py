@@ -34,6 +34,12 @@ sleep(2)
 
 navegador.switch_to.alert.accept();
 
+sleep(5)
+
+cookie = navegador.find_element_by_xpath('/html/body/div[3]/div')
+cookie.click()
+
+
 d = np.empty(shape = (1,len(marca_motor)),dtype='object')
 n = np.empty(shape = (1,len(marca_motor)),dtype='object')
 n2 = np.empty(shape = (1,len(bateria)),dtype='object')
