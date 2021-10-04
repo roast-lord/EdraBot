@@ -1,3 +1,4 @@
+pushd "%~dp0"
 @ECHO OFF
 TITLE EdraBot
 ECHO Bem vindo ao EdraBot, qual seu tipo de simulacao?

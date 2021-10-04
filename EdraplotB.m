@@ -22,7 +22,7 @@ function [] = EdraplotB(directory,nomes,titulo)
         figure(1)
         cores = cellstr(['-mo';'-k*';'-xg';'-sb';'-+c';'-rd']);
         j = 1;
-        for i = 1:5:(baterias*5)
+        for i = 1:6:(baterias*6)
             
             x_axis = all_data(:,i);
             y_axis = all_data(:,i+1);
@@ -43,7 +43,7 @@ function [] = EdraplotB(directory,nomes,titulo)
         print(['graficos/' titulo{1,k} ' TVxPT-B.png'],'-dpng')
         figure(2)
         %XY - Peso empuxo x Peso total ( Curvas de bateria)
-        for i = 1:5:(baterias*5)
+        for i = 1:6:(baterias*6)
             x_axis = all_data(:,i);
             y_axis = all_data(:,i+2);
             plot(x_axis,y_axis,cores{j,1});
@@ -63,9 +63,9 @@ function [] = EdraplotB(directory,nomes,titulo)
         print(['graficos/' titulo{1,k} ' PExPT-B.png'],'-dpng')
 
         %XY - Peso pras outrs areas x Peso total (curvas de motor)
-        
+        j=1;
         figure(3)
-        for i = 1:5:(baterias*5)
+        for i = 1:6:(baterias*6)
             x_axis = all_data(:,i);
             y_axis = x_axis - all_data(:,i+4);
             plot(x_axis,y_axis,cores{j,1});
@@ -84,6 +84,27 @@ function [] = EdraplotB(directory,nomes,titulo)
         end
         legend(nomes,'fontsize',26)
         print(['graficos/' titulo{1,k} ' PPOAxPT-B.png'],'-dpng')
+        j = 1;
+        figure(4)
+
+        for i = 1:6:(baterias*6)
+            x_axis = all_data(:,i);
+            y_axis = all_data(:,i+5);
+            plot(x_axis,y_axis,cores{j,1});
+            grid on
+            j++;
+            xlabel("Peso Total (g)", 'fontsize', 20);
+            ylabel("Velocidade MAX (km/h)", 'fontsize', 20);
+            set(gcf, 'Position', get(0, 'ScreenSize'))
+            set(gca, "XTick", x_axis(1):espacamento:x_axis(end));
+            title(titulo{1,k}, 'fontsize', 26)
+            
+            hold on
+            x_axis = 0;
+            y_axis = 0;
+        end
+        legend(nomes,'fontsize',26)
+        print(['graficos/' titulo{1,k} ' VelxPT-B.png'],'-dpng')
 
         all_data = [];
         close all
