@@ -7,7 +7,8 @@ from selenium.webdriver.common.keys import Keys
 from webdriver_manager.chrome import ChromeDriverManager
 import numpy as np
 from time import sleep
-
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions
 
 marca_motor = marca_motors.split(',')
 modelo_motor = modelo_motors.split(',')
@@ -30,9 +31,11 @@ senha_ecalc = navegador.find_element_by_xpath('//*[@id="password"]')
 senha_ecalc.send_keys(senha)
 logar = navegador.find_element_by_xpath('//*[@id="myButton"]')
 logar.click()
-sleep(2)
 
-navegador.switch_to.alert.accept();
+wait = WebDriverWait(navegador,5)
+
+alerta = wait.until(expected_conditions.alert_is_present())
+alerta.accept()
 
 sleep(5)
 
@@ -141,7 +144,7 @@ if len(bateria) == 1:
         opcao_motor_marca = Select(select_motor_marca)
         opcao_motor_marca.select_by_visible_text(marca_motor[j])
 
-        sleep(1)
+        sleep(2)
 
         select_motor_modelo = navegador.find_element_by_xpath('//*[@id="inMType"]')
         opcao_motor_modelo = Select(select_motor_modelo)
@@ -156,7 +159,7 @@ if len(bateria) == 1:
             peso.send_keys(Keys.BACKSPACE,Keys.BACKSPACE,Keys.BACKSPACE,mass_min)
 
 
-        sleep(0.5)
+        sleep(1.5)
 
         # coluna 1: Peso total, Coluna 2: Tempo de voo, Coluna 3: Peso empuxo, Coluna 4: Empuxo especifico, Coluna 5: Peso componentes.
 
@@ -164,20 +167,21 @@ if len(bateria) == 1:
 
         i=0
         delta = mass_max - mass_min
-        Dados = np.zeros(shape = ((delta//mass_interval+1),6))
+        Dados = np.zeros(shape = ((delta//mass_interval+1),7))
         for k in range(mass_min,mass_max+mass_interval,mass_interval):
             
             peso = navegador.find_element_by_xpath('//*[@id="inGWeight"]')
             peso.send_keys(Keys.BACKSPACE,Keys.BACKSPACE,Keys.BACKSPACE,Keys.BACKSPACE,k)
             calculador = navegador.find_element_by_xpath('//*[@id="theForm"]/table/tbody/tr[5]/td[17]/input')
             calculador.click()
-            sleep(1.5)
+            sleep(3)
             Peso_total = navegador.find_element_by_xpath('//*[@id="outTotAUW"]').text
             Tempo_de_voo = navegador.find_element_by_xpath('//*[@id="outBHoverFlightTime"]').text
             Peso_empuxo = navegador.find_element_by_xpath('//*[@id="outTotThrustWeight"]').text
             Empuxo_esp = navegador.find_element_by_xpath('//*[@id="outPEfficiency"]').text
             Peso_comp = navegador.find_element_by_xpath('//*[@id="outTotDriveWeight"]').text
             Velocidade_max = navegador.find_element_by_xpath('//*[@id="outCopterV"]').text
+            Voo_variado = navegador.find_element_by_xpath('//*[@id="outBMixedFlightTime"]').text
             
             Dados[i,0] = Peso_total
             Dados[i,1] = Tempo_de_voo
@@ -185,7 +189,7 @@ if len(bateria) == 1:
             Dados[i,3] = Empuxo_esp
             Dados[i,4] = Peso_comp
             Dados[i,5] = Velocidade_max
-            
+            Dados[i,6] = Voo_variado
             i += 1 
             
         d[0,j] = marca_motor[j] + ' ' + modelo_motor[j].replace('/','-') + ' - ' + bateria[z].replace('/','-') + ' - ' + diametro_helice + 'x' + passo_helice
@@ -229,6 +233,9 @@ if len(bateria) > 1:
     select_pas.send_keys(Keys.ARROW_LEFT)
     select_pas.send_keys(Keys.BACKSPACE)
     
+    select_mass_type = navegador.find_element_by_xpath('//*[@id="inGWeightCalc"]')
+    opcao_mass_type = Select(select_mass_type)
+    opcao_mass_type.select_by_visible_text(mass_type)
     
     select_helice = navegador.find_element_by_xpath('//*[@id="inPType"]')
     opcao_helice = Select(select_helice)
@@ -304,7 +311,7 @@ if len(bateria) > 1:
             opcao_motor_marca = Select(select_motor_marca)
             opcao_motor_marca.select_by_visible_text(marca_motor[j])
 
-            sleep(1)
+            sleep(3)
 
             select_motor_modelo = navegador.find_element_by_xpath('//*[@id="inMType"]')
             opcao_motor_modelo = Select(select_motor_modelo)
@@ -321,7 +328,7 @@ if len(bateria) > 1:
                 peso.send_keys(Keys.BACKSPACE,Keys.BACKSPACE,Keys.BACKSPACE,mass_min)
 
 
-            sleep(0.5)
+            sleep(1.5)
 
             # coluna 1: Peso total, Coluna 2: Tempo de voo, Coluna 3: Peso empuxo, Coluna 4: Empuxo especifico, Coluna 5: Peso componentes, coluna 6: velocidade_max
 
@@ -329,20 +336,21 @@ if len(bateria) > 1:
 
             i=0
             delta = mass_max - mass_min
-            Dados = np.zeros(shape = ((delta//mass_interval+1),6))
+            Dados = np.zeros(shape = ((delta//mass_interval+1),7))
             for k in range(mass_min,mass_max+mass_interval,mass_interval):
                 
                 peso = navegador.find_element_by_xpath('//*[@id="inGWeight"]')
                 peso.send_keys(Keys.BACKSPACE,Keys.BACKSPACE,Keys.BACKSPACE,Keys.BACKSPACE,k)
                 calculador = navegador.find_element_by_xpath('//*[@id="theForm"]/table/tbody/tr[5]/td[17]/input')
                 calculador.click()
-                sleep(1.5)
+                sleep(3)
                 Peso_total = navegador.find_element_by_xpath('//*[@id="outTotAUW"]').text
                 Tempo_de_voo = navegador.find_element_by_xpath('//*[@id="outBHoverFlightTime"]').text
                 Peso_empuxo = navegador.find_element_by_xpath('//*[@id="outTotThrustWeight"]').text
                 Empuxo_esp = navegador.find_element_by_xpath('//*[@id="outPEfficiency"]').text
                 Peso_comp = navegador.find_element_by_xpath('//*[@id="outTotDriveWeight"]').text
                 Velocidade_max = navegador.find_element_by_xpath('//*[@id="outCopterV"]').text
+                Voo_variado = navegador.find_element_by_xpath('//*[@id="outBMixedFlightTime"]').text
                 
                 Dados[i,0] = Peso_total
                 Dados[i,1] = Tempo_de_voo
@@ -350,25 +358,26 @@ if len(bateria) > 1:
                 Dados[i,3] = Empuxo_esp
                 Dados[i,4] = Peso_comp
                 Dados[i,5] = Velocidade_max
-                
+                Dados[i,6] = Voo_variado
+                print(Dados)
                 
                 i += 1 
-                
+        
+        
             d2[j,z] = marca_motor[j] + ' ' + modelo_motor[j].replace('/','-') + ' - ' + bateria[z].replace('/','-') + ' - ' + diametro_helice + 'x' + passo_helice
-            
-            
+
+
             np.savetxt( 'csv/' + marca_motor[j] + ' ' + modelo_motor[j].replace('/','-') + ' - ' + bateria[z].replace('/','-') + ' - ' + diametro_helice + 'x' + passo_helice + '.csv', Dados, delimiter=",",fmt='%1.3f')
 
         t2[0,j] = marca_motor[j] + ' ' + modelo_motor[j].replace('/','-') + ' - ' + helice + ' ' + diametro_helice + 'x' + passo_helice + ' ' + ESC
-    
+
     for x in range(0,len(bateria)):
         n2[0,x] = bateria[x].replace('/','-') + ' ' + s + 'S'
-            
+
+
     np.savetxt('data/dB.csv', d2, delimiter=",",fmt='%s')
     np.savetxt('data/nB.csv', n2, delimiter=",",fmt='%s')
     np.savetxt('data/tB.csv', t2, delimiter=",",fmt='%s')       
-
-
 
 
 navegador.close()

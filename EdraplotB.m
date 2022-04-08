@@ -20,9 +20,9 @@ function [] = EdraplotB(directory,nomes,titulo)
 
         %XY - tempo de voo x peso total (curvas de bateria)
         figure(1)
-        cores = cellstr(['-mo';'-k*';'-xg';'-sb';'-+c';'-rd']);
+        cores = cellstr(['-mo';'-k*';'-xg';'-sb';'-+c';'-rd';'-yp';'-mv']);
         j = 1;
-        for i = 1:6:(baterias*6)
+        for i = 1:7:(baterias*7)
             
             x_axis = all_data(:,i);
             y_axis = all_data(:,i+1);
@@ -42,8 +42,9 @@ function [] = EdraplotB(directory,nomes,titulo)
         legend(nomes,'fontsize',26);
         print(['graficos/' titulo{1,k} ' TVxPT-B.png'],'-dpng')
         figure(2)
+        j=1;
         %XY - Peso empuxo x Peso total ( Curvas de bateria)
-        for i = 1:6:(baterias*6)
+        for i = 1:7:(baterias*7)
             x_axis = all_data(:,i);
             y_axis = all_data(:,i+2);
             plot(x_axis,y_axis,cores{j,1});
@@ -63,9 +64,9 @@ function [] = EdraplotB(directory,nomes,titulo)
         print(['graficos/' titulo{1,k} ' PExPT-B.png'],'-dpng')
 
         %XY - Peso pras outrs areas x Peso total (curvas de motor)
-        j=1;
         figure(3)
-        for i = 1:6:(baterias*6)
+        j=1;
+        for i = 1:7:(baterias*7)
             x_axis = all_data(:,i);
             y_axis = x_axis - all_data(:,i+4);
             plot(x_axis,y_axis,cores{j,1});
@@ -84,10 +85,10 @@ function [] = EdraplotB(directory,nomes,titulo)
         end
         legend(nomes,'fontsize',26)
         print(['graficos/' titulo{1,k} ' PPOAxPT-B.png'],'-dpng')
-        j = 1;
+        %Velocidade Max
         figure(4)
-
-        for i = 1:6:(baterias*6)
+        j=1;
+        for i = 1:7:(baterias*7)
             x_axis = all_data(:,i);
             y_axis = all_data(:,i+5);
             plot(x_axis,y_axis,cores{j,1});
@@ -105,6 +106,28 @@ function [] = EdraplotB(directory,nomes,titulo)
         end
         legend(nomes,'fontsize',26)
         print(['graficos/' titulo{1,k} ' VelxPT-B.png'],'-dpng')
+        %VOO VARIADO
+        figure(5)
+        j = 1;
+        for i = 1:7:(baterias*7)
+            
+            x_axis = all_data(:,i);
+            y_axis = all_data(:,i+6);
+            plot(x_axis,y_axis,cores{j,1});
+            grid on
+            j++;
+            xlabel("Peso Total (g)", 'fontsize', 20);
+            ylabel(" Tempo de voo Variado (min)", 'fontsize', 20);
+            set(gcf, 'Position', get(0, 'ScreenSize'))
+            set(gca, "XTick", x_axis(1):espacamento:x_axis(end));
+            title(titulo{1,k}, 'fontsize', 26)
+            x_axis = 0;
+            y_axis = 0;
+            hold on
+            
+        end
+        legend(nomes,'fontsize',26);
+        print(['graficos/' titulo{1,k} ' TVVxPT-B.png'],'-dpng')
 
         all_data = [];
         close all

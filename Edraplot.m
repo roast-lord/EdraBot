@@ -17,7 +17,7 @@ function [] = Edraplot()
 
     %XY - tempo de voo x peso total (curvas de motor)
     figure(1)
-    cores = cellstr(['-mo';'-k*';'-xg';'-sb';'-+c';'-rd']);
+    cores = cellstr(['-mo';'-k*';'-xg';'-sb';'-+c';'-rd';'-yp';'-mv']);
     j = 1;
     for i = 1:6:(motores*6)
         

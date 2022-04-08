@@ -1,1 +1,9 @@
 nossologin.txt
+info.py
+*.csv
+__pycache__/
+*.png
+Lib/
+pyvenv.cfg
+Scripts/
+Include/
