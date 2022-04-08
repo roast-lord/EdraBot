@@ -178,7 +178,7 @@ if len(bateria) == 1:
             peso.send_keys(Keys.BACKSPACE,Keys.BACKSPACE,Keys.BACKSPACE,Keys.BACKSPACE,k)
             calculador = navegador.find_element_by_xpath('//*[@id="theForm"]/table/tbody/tr[5]/td[17]/input')
             calculador.click()
-            sleep(4)
+            sleep(5)
             Peso_total = navegador.find_element_by_xpath('//*[@id="outTotAUW"]').text
             Tempo_de_voo = navegador.find_element_by_xpath('//*[@id="outBHoverFlightTime"]').text
             Peso_empuxo = navegador.find_element_by_xpath('//*[@id="outTotThrustWeight"]').text
@@ -347,7 +347,7 @@ if len(bateria) > 1:
                 peso.send_keys(Keys.BACKSPACE,Keys.BACKSPACE,Keys.BACKSPACE,Keys.BACKSPACE,k)
                 calculador = navegador.find_element_by_xpath('//*[@id="theForm"]/table/tbody/tr[5]/td[17]/input')
                 calculador.click()
-                sleep(4)
+                sleep(5)
                 Peso_total = navegador.find_element_by_xpath('//*[@id="outTotAUW"]').text
                 Tempo_de_voo = navegador.find_element_by_xpath('//*[@id="outBHoverFlightTime"]').text
                 Peso_empuxo = navegador.find_element_by_xpath('//*[@id="outTotThrustWeight"]').text

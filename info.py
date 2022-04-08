@@ -1,2 +1,2 @@
-login = 'seu login'
-senha = 'sua senha'
+login = 'Sua senha'
+senha = 'Seu login'
