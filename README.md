@@ -1,6 +1,6 @@
 # EdraBot
 
-Repositorio do EdraBot
+Repositorio do EdraBot utilizado na EDRA.
 
 
 ## Instalação
