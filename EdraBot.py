@@ -32,9 +32,12 @@ senha_ecalc.send_keys(senha)
 logar = navegador.find_element_by_xpath('//*[@id="myButton"]')
 logar.click()
 
-wait = WebDriverWait(navegador,5)
+wait = WebDriverWait(navegador,50)
 
 alerta = wait.until(expected_conditions.alert_is_present())
+
+sleep(3)
+
 alerta.accept()
 
 sleep(5)
@@ -51,6 +54,7 @@ t2 = np.empty(shape = (1,len(marca_motor)),dtype='object')
 d2 = np.empty(shape = (len(marca_motor),len(bateria)),dtype='object')
 
 if len(bateria) == 1:
+    z = 0
     select_bateria = navegador.find_element_by_xpath('//*[@id="inBCell"]')
     opcao_bateria = Select(select_bateria)
         
@@ -83,21 +87,6 @@ if len(bateria) == 1:
 
     diametro = navegador.find_element_by_xpath('//*[@id="inPDiameter"]')
     if float(diametro_helice).is_integer():
-        diametro.send_keys(Keys.BACKSPACE)
-        diametro.send_keys(diametro_helice)
-        diametro.send_keys(Keys.ARROW_LEFT)
-        diametro.send_keys(Keys.ARROW_LEFT)
-        diametro.send_keys(Keys.BACKSPACE)
-    else:
-        diametro.send_keys(Keys.BACKSPACE)
-        diametro.send_keys(diametro_helice)
-        diametro.send_keys(Keys.ARROW_LEFT)
-        diametro.send_keys(Keys.ARROW_LEFT)
-        diametro.send_keys(Keys.ARROW_LEFT)
-        diametro.send_keys(Keys.BACKSPACE)
-
-    passo = navegador.find_element_by_xpath('//*[@id="inPPitch"]')
-    if  float(passo_helice).is_integer():
         if len(diametro_helice) == 1:
             diametro.send_keys(Keys.BACKSPACE) 
             diametro.send_keys(diametro_helice)
@@ -108,7 +97,23 @@ if len(bateria) == 1:
             diametro.send_keys(diametro_helice)
             diametro.send_keys(Keys.ARROW_LEFT)
             diametro.send_keys(Keys.ARROW_LEFT)
-            diametro.send_keys(Keys.BACKSPACE)
+            diametro.send_keys(Keys.BACKSPACE)  
+    else:
+        diametro.send_keys(Keys.BACKSPACE)
+        diametro.send_keys(diametro_helice)
+        diametro.send_keys(Keys.ARROW_LEFT)
+        diametro.send_keys(Keys.ARROW_LEFT)
+        diametro.send_keys(Keys.ARROW_LEFT)
+        diametro.send_keys(Keys.BACKSPACE)
+
+
+    passo = navegador.find_element_by_xpath('//*[@id="inPPitch"]')
+    if  float(passo_helice).is_integer():
+        passo.send_keys(Keys.BACKSPACE)
+        passo.send_keys(Keys.BACKSPACE)
+        passo.send_keys(passo_helice)
+        passo.send_keys(Keys.ARROW_LEFT)
+        passo.send_keys(Keys.BACKSPACE)
     else:
         passo.send_keys(Keys.BACKSPACE)
         passo.send_keys(Keys.BACKSPACE)
@@ -122,11 +127,10 @@ if len(bateria) == 1:
     opcao_ESC = Select(select_ESC)
     opcao_ESC.select_by_visible_text(ESC)
     
+    
+    
     for j in range(0,len(marca_motor)):
         
-        z = 0
-        
-
 
         #inicio da automatização
 
@@ -159,7 +163,7 @@ if len(bateria) == 1:
             peso.send_keys(Keys.BACKSPACE,Keys.BACKSPACE,Keys.BACKSPACE,mass_min)
 
 
-        sleep(1.5)
+        sleep(2)
 
         # coluna 1: Peso total, Coluna 2: Tempo de voo, Coluna 3: Peso empuxo, Coluna 4: Empuxo especifico, Coluna 5: Peso componentes.
 
@@ -174,7 +178,7 @@ if len(bateria) == 1:
             peso.send_keys(Keys.BACKSPACE,Keys.BACKSPACE,Keys.BACKSPACE,Keys.BACKSPACE,k)
             calculador = navegador.find_element_by_xpath('//*[@id="theForm"]/table/tbody/tr[5]/td[17]/input')
             calculador.click()
-            sleep(3)
+            sleep(4)
             Peso_total = navegador.find_element_by_xpath('//*[@id="outTotAUW"]').text
             Tempo_de_voo = navegador.find_element_by_xpath('//*[@id="outBHoverFlightTime"]').text
             Peso_empuxo = navegador.find_element_by_xpath('//*[@id="outTotThrustWeight"]').text
@@ -343,7 +347,7 @@ if len(bateria) > 1:
                 peso.send_keys(Keys.BACKSPACE,Keys.BACKSPACE,Keys.BACKSPACE,Keys.BACKSPACE,k)
                 calculador = navegador.find_element_by_xpath('//*[@id="theForm"]/table/tbody/tr[5]/td[17]/input')
                 calculador.click()
-                sleep(3)
+                sleep(4)
                 Peso_total = navegador.find_element_by_xpath('//*[@id="outTotAUW"]').text
                 Tempo_de_voo = navegador.find_element_by_xpath('//*[@id="outBHoverFlightTime"]').text
                 Peso_empuxo = navegador.find_element_by_xpath('//*[@id="outTotThrustWeight"]').text
@@ -359,7 +363,6 @@ if len(bateria) > 1:
                 Dados[i,4] = Peso_comp
                 Dados[i,5] = Velocidade_max
                 Dados[i,6] = Voo_variado
-                print(Dados)
                 
                 i += 1 
         

@@ -130,6 +130,8 @@ function [] = EdraplotB(directory,nomes,titulo)
         print(['graficos/' titulo{1,k} ' TVVxPT-B.png'],'-dpng')
 
         all_data = [];
+
+        
         close all
     end
 end

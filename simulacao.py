@@ -1,20 +1,20 @@
 
 mass_type = 'com componentes'
 
-mass_min = 1520
-mass_max = 2520
+mass_min = 1500
+mass_max = 2000
 mass_interval = 100
 
 
-marca_motors = 'T-Motor'
-modelo_motors = 'MN3110-700 (700)'
+marca_motors = 'T-Motor,T-Motor,T-Motor'
+modelo_motors = 'MN3110-700 (700),MN3110-780 (780),MN3508-700 (700)'
 
 
 quadro = '565'
-baterias = 'LiPo 4000mAh - 35/50C,LiPo 4200mAh - 35/50C,LiPo 4500mAh - 35/50C,LiPo 5000mAh - 35/50C,LiPo 6000mAh - 35/50C'
+baterias = 'LiPo 6000mAh - 35/50C'
 
 
-s = '3'
+s = '4'
 ESC = 'max 40A'
 
 

@@ -10,13 +10,13 @@ r =  str( input() )
 print("\n")
 
 if (r == "B" or r == "b"):
-    print("=====================Iniciando Simulação com Curvas de Motores =====================\n")
+    print("=====================Iniciando Simulação com Curvas de Baterias =====================\n")
     sub.run("python EdraBot.py",shell = True)
     sub.run("start octave.bat EdraplotB.m",shell = True)
 elif(r == "M" or r == "m"):
-    print("=====================Iniciando Simulacao com Curvas de Baterias=====================\n")
+    print("=====================Iniciando Simulacao com Curvas de Motores=====================\n")
     sub.run("python EdraBot.py",shell = True)
-    sub.run("start octave.bat EdraplotB.m",shell = True)
+    sub.run("start octave.bat Edraplot.m",shell = True)
 else:
     print("Erro: Resposta Inesperada\n")
     exit()
