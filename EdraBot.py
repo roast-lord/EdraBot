@@ -171,7 +171,7 @@ if len(bateria) == 1:
 
         i = 0
         delta = mass_max - mass_min
-        Dados = np.zeros(shape=((delta // mass_interval + 1), 7))
+        Dados = np.zeros(shape=((delta // mass_interval + 1), 10))
         for k in range(mass_min, mass_max + mass_interval, mass_interval):
 
             peso = navegador.find_element_by_xpath('//*[@id="inGWeight"]')
@@ -202,6 +202,9 @@ if len(bateria) == 1:
             Voo_variado = navegador.find_element_by_xpath(
                 '//*[@id="outBMixedFlightTime"]'
             ).text
+            Corrente = navegador.find_element_by_xpath('//*[@id="outHoverI"]').text
+            Tensao = navegador.find_element_by_xpath('//*[@id="outHoverV"]').text
+            rpm = navegador.find_element_by_xpath('//*[@id="outHoverRpm"]').text
 
             Dados[i, 0] = Peso_total
             Dados[i, 1] = Tempo_de_voo
@@ -210,6 +213,10 @@ if len(bateria) == 1:
             Dados[i, 4] = Peso_comp
             Dados[i, 5] = Velocidade_max
             Dados[i, 6] = Voo_variado
+            Dados[i, 7] = Corrente
+            Dados[i, 8] = Tensao
+            Dados[i, 9] = rpm
+
             i += 1
 
         d[0, j] = (
@@ -391,7 +398,7 @@ if len(bateria) > 1:
 
             i = 0
             delta = mass_max - mass_min
-            Dados = np.zeros(shape=((delta // mass_interval + 1), 7))
+            Dados = np.zeros(shape=((delta // mass_interval + 1), 10))
             for k in range(mass_min, mass_max + mass_interval, mass_interval):
 
                 peso = navegador.find_element_by_xpath('//*[@id="inGWeight"]')
@@ -424,6 +431,9 @@ if len(bateria) > 1:
                 Voo_variado = navegador.find_element_by_xpath(
                     '//*[@id="outBMixedFlightTime"]'
                 ).text
+                Corrente = navegador.find_element_by_xpath('//*[@id="outHoverI"]').text
+                Tensao = navegador.find_element_by_xpath('//*[@id="outHoverV"]').text
+                rpm = navegador.find_element_by_xpath('//*[@id="outHoverRpm"]').text
 
                 Dados[i, 0] = Peso_total
                 Dados[i, 1] = Tempo_de_voo
@@ -432,6 +442,9 @@ if len(bateria) > 1:
                 Dados[i, 4] = Peso_comp
                 Dados[i, 5] = Velocidade_max
                 Dados[i, 6] = Voo_variado
+                Dados[i, 7] = Corrente
+                Dados[i, 8] = Tensao
+                Dados[i, 9] = rpm
 
                 i += 1
 
