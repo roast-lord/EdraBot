@@ -1,4 +1,3 @@
-nossologin.txt
 *.csv
 __pycache__/
 *.png
@@ -7,3 +6,5 @@ pyvenv.cfg
 Scripts/
 Include/
 info.py
+.env
+/venv

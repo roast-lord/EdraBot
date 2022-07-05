@@ -21,7 +21,12 @@ navegador = webdriver.Chrome(ChromeDriverManager().install())
 #Processo de Login
 url_login = "https://www.ecalc.ch/calcmember/login.php?https://www.ecalc.ch/xcoptercalc.php"
 
-
+dir = 'data'
+for file in os.scandir(dir):
+    os.remove(file.path)
+dir = 'csv'
+for file in os.scandir(dir):
+    os.remove(file.path)
 
 navegador.get(url_login)
 sleep(2)
@@ -52,6 +57,8 @@ n2 = np.empty(shape = (1,len(bateria)),dtype='object')
 t = np.empty(shape = (1,1),dtype='object')
 t2 = np.empty(shape = (1,len(marca_motor)),dtype='object')
 d2 = np.empty(shape = (len(marca_motor),len(bateria)),dtype='object')
+
+
 
 if len(bateria) == 1:
     z = 0

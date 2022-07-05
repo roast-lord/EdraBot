@@ -1,26 +1,28 @@
 
 mass_type = 'com componentes'
 
-mass_min = 1500
-mass_max = 2000
+massa_bateria = 210
+
+mass_min = 920 + massa_bateria + 250
+mass_max = mass_min + 500
 
 mass_interval = 100
 
 
-marca_motors = 'T-Motor'
-modelo_motors = 'MN3110-700 (700)'
+marca_motors = 'EMAX'
+modelo_motors = 'XA2212-820 (820)'
 
 
 quadro = '565'
 
-baterias = 'LiPo 4000mAh - 35/50C,LiPo 6000mAh - 35/50C'
+baterias = 'LiPo 5000mAh - 35/50C,LiPo 6000mAh - 35/50C'
 
 
-s = '4'
-ESC = 'max 40A'
+s = '3'
+ESC = 'max 20A'
 
 
-helice ='APC Electric E'
+helice ='APC SlowFly SF'
 pas = '2'
-diametro_helice = '12'
-passo_helice = '6'
+diametro_helice = '11'
+passo_helice = '3.8'

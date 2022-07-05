@@ -7,11 +7,11 @@ function [] = Edraplot()
     titulo = csv2cell('data/t.csv');
 
     for i = 1:motores
-        data = csvread( ['csv/' directory{1,i} '.csv'] );
         
-
+        data = csvread( ['csv/' directory{1,i} '.csv'] );
         all_data = [all_data data];
         data = [];
+
     end
     espacamento = all_data(2,1) - all_data(1,1);
 
@@ -242,5 +242,5 @@ function [] = Edraplot()
         
     end
 
-close all
+    close all
 end
