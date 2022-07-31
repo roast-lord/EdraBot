@@ -17,7 +17,6 @@ bateria = baterias.split(",")
 
 navegador = webdriver.Chrome(ChromeDriverManager().install())
 
-
 # Processo de Login
 url_login = (
     "https://www.ecalc.ch/calcmember/login.php?https://www.ecalc.ch/xcoptercalc.php"
